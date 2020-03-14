@@ -114,6 +114,8 @@ xnoremap <leader>y "+y
 augroup lkp_group
   autocmd!
   autocmd FileType make set noexpandtab
+  autocmd BufRead .todo.md nnoremap x rx
+  autocmd BufRead .todo.md nnoremap <space> r<space>
   " autocmd BufWritepost *.[ch] silent execute ":!ctags --exclude=.git -R ."
 augroup END
 
@@ -459,7 +461,7 @@ let g:vimtex_compiler_latexmk = {
     \}
 "}}}
 " instant_markdown{{{
-let g:instant_markdown_slow = 1
+" let g:instant_markdown_slow = 1
 let g:instant_markdown_autostart = 0
 " let g:instant_markdown_open_to_the_world = 1
 " let g:instant_markdown_allow_unsafe_content = 1
