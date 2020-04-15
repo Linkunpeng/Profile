@@ -114,8 +114,8 @@ xnoremap <leader>y "+y
 augroup lkp_group
   autocmd!
   autocmd FileType make set noexpandtab
-  autocmd BufRead .todo.md nnoremap x rx
-  autocmd BufRead .todo.md nnoremap <space> r<space>
+  autocmd BufRead todo.md,mem.md nnoremap x 0t]rx
+  autocmd BufRead todo.md,mem.md nnoremap <space> 0t]r<space>
   " autocmd BufWritepost *.[ch] silent execute ":!ctags --exclude=.git -R ."
 augroup END
 
@@ -267,6 +267,7 @@ let g:UltiSnipsJumpForwardTrigger="<M-f>"
 let g:UltiSnipsJumpBackwardTrigger="<M-b>"
 let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsNoPythonWarning = 1
+let g:UltiSnipsSnippetDirectories=["UltiSnips", "mysnippets"]
 "}}}
 "NERDCOMMENTER{{{
 let g:NERDSpaceDelims = 1
@@ -409,19 +410,19 @@ let g:Lf_Gtagslabel = 'native-pygments'
 
 
 "VimWiki{{{
-let wiki_1 = {}
-let wiki_1.path = '~/tmp/.todo/'
-let wiki_1.syntax = 'markdown'
-let wiki_1.ext = '.md'
-
-let g:vimwiki_global_ext = 0
-let g:vimwiki_list = [wiki_1]
+" let wiki_1 = {}
+" let wiki_1.path = '~/tmp/.todo/'
+" let wiki_1.syntax = 'markdown'
+" let wiki_1.ext = '.md'
+"
+" let g:vimwiki_global_ext = 0
+" let g:vimwiki_list = [wiki_1]
 "}}}
 "Translater{{{
 let g:vtm_target_lang = 'zh'
 let g:vtm_default_engines = ['google', 'bing']
 " let g:vtm_default_engines = [ 'bing' ]
-let g:vtm_proxy_url = ''
+" let g:vtm_proxy_url = ''
 let g:vtm_history_enable = 1
 let g:vtm_history_count = 5000
 let g:vtm_history_dir = '/home/lkp/.vimtrans'
@@ -461,12 +462,12 @@ let g:vimtex_compiler_latexmk = {
     \}
 "}}}
 " instant_markdown{{{
-" let g:instant_markdown_slow = 1
+let g:instant_markdown_slow = 0
 let g:instant_markdown_autostart = 0
-" let g:instant_markdown_open_to_the_world = 1
-" let g:instant_markdown_allow_unsafe_content = 1
-" let g:instant_markdown_allow_external_content = 0
-" let g:instant_markdown_mathjax = 1
+let g:instant_markdown_open_to_the_world = 1
+let g:instant_markdown_allow_unsafe_content = 0
+let g:instant_markdown_allow_external_content = 1
+let g:instant_markdown_mathjax = 1
 " let g:instant_markdown_logfile = '/tmp/instant_markdown.log'
 let g:instant_markdown_autoscroll = 1
 " let g:instant_markdown_port = 8888
@@ -498,7 +499,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'} " coc.nvim
 Plug 'SirVer/ultisnips'                         " ultisnips
 Plug 'honza/vim-snippets'                       " snippets
 Plug 'scrooloose/nerdcommenter'                 " nerdcommenter
-Plug 'bronson/vim-trailing-whitespace'          " fix whitespace
+" Plug 'bronson/vim-trailing-whitespace'          " fix whitespace
 Plug 'easymotion/vim-easymotion'                " easymotion
 
 " Code Read
@@ -516,7 +517,7 @@ Plug 'Yggdroot/LeaderF'                         " LeaderF
 Plug 'mileszs/ack.vim'                          " ack
 
 " Tools
-Plug 'vimwiki/vimwiki'                          "vimwiki
+" Plug 'vimwiki/vimwiki'                          "vimwiki
 Plug 'tpope/vim-fugitive'                       " fugit
 Plug 'lervag/vimtex'                            " vimtex
 Plug 'suan/vim-instant-markdown', {'for': 'markdown'}  " markdown

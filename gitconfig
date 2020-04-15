@@ -1,30 +1,20 @@
 [user]
-	name = lkp
-	email = emomo.com
+	name = Gavin
+	email = lkp1115@outlook.com
 [core]
 	editor = nvim
+	quotepath = false
 
 [alias]
-	; l = log --pretty=oneline --graph --decorate
-	c = commit -am
-	; fpush = push --force
+	l = log --pretty=oneline --graph --decorate
 	s = status
-	; sclone = clone --depth=1
-	amend = commit --amend --all
-	; undocommit = reset HEAD~
-	; hreset = reset --hard
-    co = checkout
-	df = diff --color --color-words --abbrev
-	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
-	; cherrypick = cherry-pick
-	; cherry = cherry-pick
-	; cp = cherry-pick
-
-	# Show the diff between the latest commit and the current state
-    d = !"git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
-
-	; reup = rebase-update # depot_tools specific
-
+	co = commit
+	b = branch
+	ch = checkout
+	r = remote
+    undocommit = reset HEAD~
+[credential]
+	helper = store
 
 
 [color]
