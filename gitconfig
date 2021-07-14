@@ -8,9 +8,10 @@
 [alias]
 	l = log --pretty=oneline --graph --decorate
 	s = status
-	co = commit
+	cm = commit -m
+	cma = commit -am
 	b = branch
-	ch = checkout
+	co = checkout
 	r = remote
     undocommit = reset HEAD~
 [credential]

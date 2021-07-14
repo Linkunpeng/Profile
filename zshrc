@@ -1,5 +1,5 @@
 # If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=/sbin/:$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="/home/lkp/.oh-my-zsh"
@@ -69,7 +69,6 @@ ZSH_THEME="robbyrussell"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-    tmux
     z
     command-not-found
     colored-man-pages
@@ -92,13 +91,14 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
+
 alias g='git'
+alias s='screenfetch'
+alias m='remaps'
 alias v='nvim'
 alias vi='nvim'
 alias h='history'
-alias hh='history | tail -n 50 | bat'
-alias ag='ag -f --hidden'
-alias cat='bat'
+alias hh='history | tail -n 50 | cat'
 
 alias ..="cd .."
 alias cd..="cd .."
@@ -111,31 +111,26 @@ alias mv='mv -v'
 alias rm='rm -i -v'
 alias cp='cp -v'
 
-alias tmuxn='tmux new -s '
-alias tmuxa='tmux a -t '
-
 alias hosts='sudo $EDITOR /etc/hosts'
-alias todo='nvim -c InstantMarkdownPreview /home/lkp/.data/todo.md'
-alias note='cd /home/lkp/.note && nvim -c NERDTreeToggle'
-alias clk='nvim -c InstantMarkdownPreview /home/lkp/.data/clk.md'
-alias recite='nvim -c InstantMarkdownPreview /home/lkp/.data/mem.md'
-alias work='cd /home/lkp/workspace/Cpp/'
+alias work='cd /home/lkp/Workspace/'
+alias wiki='cd /home/lkp/Documents/wiki/ && nvim'
 alias snip='cd /home/lkp/.config/nvim/mysnippets/'
-alias setproxy='export http_proxy=127.0.0.1:8080 ; export https_proxy=127.0.0.1:8080' 
+
+
+
+alias setproxy=' export http_proxy=127.0.0.1:7891 ; export https_proxy=127.0.0.1:7891'
 alias unsetproxy='unset https_proxy ; unset https_proxy'
-alias dp1k='xrandr --output HDMI-1-1 --mode "1920x1080"'
-alias dp2k='xrandr --output HDMI-1-1 --mode "2560x1440_30.00"'
-alias dpleft='xrandr --output HDMI-1-1 --rotate left'
-alias dpnormal='xrandr --output HDMI-1-1 --rotate normal'
 
 
-alias -s pdf='firefox'
+alias -s pdf='zathura'
 alias -s mp3='mpv'
+alias -s mp4='smplayer'
 alias -s flac='mpv'
-alias -s md='typora-alanzanattadev'
+alias -s md='vim'
+alias -s png='sxiv'
+alias -s jpg='sxiv'
 
 export EDITOR=nvim
-export PATH=$PATH:/usr/local/app/gcc-arm-none-eabi-5_4-2016q3/bin
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -161,3 +156,9 @@ export PATH=$PATH:/usr/local/app/gcc-arm-none-eabi-5_4-2016q3/bin
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+
+PATH="/home/lkp/perl5/bin${PATH:+:${PATH}}"; export PATH;
+PERL5LIB="/home/lkp/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+PERL_LOCAL_LIB_ROOT="/home/lkp/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+PERL_MB_OPT="--install_base \"/home/lkp/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/home/lkp/perl5"; export PERL_MM_OPT;

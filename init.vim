@@ -19,7 +19,7 @@
 
 set nocompatible
 set number
-set relativenumber
+" set relativenumber
 set magic
 set ruler
 set hidden
@@ -33,20 +33,21 @@ set nowritebackup
 set cmdheight=2
 set cursorline
 set expandtab
+set fileencodings=ucs-bom,utf-8,utf-16,gbk,big5,gb18030,latin1
+" set encoding=UTF-8
 set shiftwidth=4
 set softtabstop=4
 set tabstop=4
 set autoread
-set encoding=utf-8
 set path+=**/**
 set suffixesadd+=.h
 set tags=tags;
 set wrap
-set textwidth=80
+" set textwidth=80
 syntax enable
 syntax on
 filetype off
-set grepprg=ag\ --vimgrep\ $*
+" set grepprg=ag\ --vimgrep\ $*
 set grepformat=%f:%l:%c:%m
 
 let mapleader = ","
@@ -56,11 +57,13 @@ let maplocalleader = ","
 " Background{{{
 
 " let g:molokai_original = 1
-set background=dark
 colorscheme molokai
+" colorscheme solarized
 " colorscheme gruvbox
+set background=dark
+" set background=light
 
-" highlight Normal guibg=NONE ctermbg=NONE
+highlight Normal guibg=NONE ctermbg=NONE
 
 "}}}
 "KeyMap{{{
@@ -114,8 +117,13 @@ xnoremap <leader>y "+y
 augroup lkp_group
   autocmd!
   autocmd FileType make set noexpandtab
-  autocmd BufRead todo.md,mem.md nnoremap x 0t]rx
-  autocmd BufRead todo.md,mem.md nnoremap <space> 0t]r<space>
+  " autocmd BufRead todo.md,mem.md nnoremap x 0t]rx
+  " autocmd BufRead todo.md,mem.md nnoremap <space> 0t]r<space>
+  autocmd BufRead *.dot,*.gv nnoremap <leader>gg :<C-U>Graphviz png<CR>
+  autocmd BufRead *.md nnoremap <leader>md :<C-U>MarkdownPreview<CR>
+  autocmd BufRead *.puml nnoremap <leader>uml :<C-U>!java -jar /home/lkp/.local/src/plantuml.jar %<CR>
+  autocmd BufWritepost *.puml silent execute ":!java -jar /home/lkp/.local/src/plantuml.jar %"
+  autocmd BufWritepost *.dot,*.gv silent execute ":GraphvizCompile png"
   " autocmd BufWritepost *.[ch] silent execute ":!ctags --exclude=.git -R ."
 augroup END
 
@@ -244,23 +252,23 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " Using CocList
-" " Show all diagnostics
-" nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
-" " Manage extensions
-" nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
-" " Show commands
-" nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
-" " Find symbol of current document
-" nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
-" " Search workspace symbols
-" nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
-" " Do default action for next item.
-" nnoremap <silent> <space>j  :<C-u>CocNext<CR>
-" " Do default action for previous item.
-" nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
-" " Resume latest coc list
-" nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
-"}}}
+" Show all diagnostics
+nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+" Manage extensions
+nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+" Show commands
+nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+" Find symbol of current document
+nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+" Search workspace symbols
+nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+" Do default action for next item.
+nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+" Do default action for previous item.
+nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+" Resume latest coc list
+nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+" }}}
 "Ultisnips{{{
 let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsJumpForwardTrigger="<M-f>"
@@ -357,18 +365,18 @@ nnoremap dit :TagbarToggle<CR>
 
 "}}}
 " Ack {{{
-if executable('ag')
-    let g:ackprg = 'ag --vimgrep $*'
-endif
-let g:ack_mappings = { "o": "<CR><C-W>j"}
-let g:ackhighlight = 1
-
-cabbrev ag Ack!
-cabbrev aga AckAdd!
-cabbrev agf AckFile!
-cabbrev ack Ack!
-cabbrev acka AckAdd!
-cabbrev ackf AckFile!
+" if executable('ag')
+"     let g:ackprg = 'ag --vimgrep $*'
+" endif
+" let g:ack_mappings = { "o": "<CR><C-W>j"}
+" let g:ackhighlight = 1
+"
+" cabbrev ag Ack!
+" cabbrev aga AckAdd!
+" cabbrev agf AckFile!
+" cabbrev ack Ack!
+" cabbrev acka AckAdd!
+" cabbrev ackf AckFile!
 
 "}}}
 " Leaderf{{{
@@ -461,19 +469,6 @@ let g:vimtex_compiler_latexmk = {
     \ ],
     \}
 "}}}
-" instant_markdown{{{
-let g:instant_markdown_slow = 0
-let g:instant_markdown_autostart = 0
-let g:instant_markdown_open_to_the_world = 1
-let g:instant_markdown_allow_unsafe_content = 0
-let g:instant_markdown_allow_external_content = 1
-let g:instant_markdown_mathjax = 1
-" let g:instant_markdown_logfile = '/tmp/instant_markdown.log'
-let g:instant_markdown_autoscroll = 1
-" let g:instant_markdown_port = 8888
-" let g:instant_markdown_python = 1
-let g:instant_markdown_browser = "firefox --new-window"
-"}}}
 "gutentags{{{
 let g:gutentags_project_root = ['.root', '.svn', '.git', '.project']
 let g:gutentags_ctags_tagfile = '.tags'
@@ -487,7 +482,121 @@ let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
 let g:gutentags_ctags_extra_args += ['--c++-kinds=+pxI']
 let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
 " }}}
+"graphviz{{{
+let g:graphviz_viewer = 'xdg-open'
+let g:graphviz_output_format = 'png'
+" Options passed on to dot. Default is ''.
+let g:graphviz_shell_option = ''
+" }}}
 
+" instant_markdown{{{
+" let g:instant_markdown_slow = 0
+" let g:instant_markdown_autostart = 0
+" let g:instant_markdown_open_to_the_world = 1
+" let g:instant_markdown_allow_unsafe_content = 1
+" let g:instant_markdown_allow_external_content = 1
+" let g:instant_markdown_mathjax = 1
+" " let g:instant_markdown_logfile = '/tmp/instant_markdown.log'
+" let g:instant_markdown_autoscroll = 1
+" " let g:instant_markdown_port = 8888
+" " let g:instant_markdown_python = 1
+" let g:instant_markdown_browser = "firefox --new-window"
+"}}}
+
+" markdown preview{{{
+"
+" set to 1, nvim will open the preview window after entering the markdown buffer
+" default: 0
+let g:mkdp_auto_start = 0
+
+" set to 1, the nvim will auto close current preview window when change
+" from markdown buffer to another buffer
+" default: 1
+let g:mkdp_auto_close = 1
+
+" set to 1, the vim will refresh markdown when save the buffer or
+" leave from insert mode, default 0 is auto refresh markdown as you edit or
+" move the cursor
+" default: 0
+let g:mkdp_refresh_slow = 0
+
+" set to 1, the MarkdownPreview command can be use for all files,
+" by default it can be use in markdown file
+" default: 0
+let g:mkdp_command_for_global = 0
+
+" set to 1, preview server available to others in your network
+" by default, the server listens on localhost (127.0.0.1)
+" default: 0
+let g:mkdp_open_to_the_world = 0
+
+" use custom IP to open preview page
+" useful when you work in remote vim and preview on local browser
+" more detail see: https://github.com/iamcco/markdown-preview.nvim/pull/9
+" default empty
+let g:mkdp_open_ip = ''
+
+" specify browser to open preview page
+" default: ''
+let g:mkdp_browser = ''
+
+" set to 1, echo preview page url in command line when open preview page
+" default is 0
+let g:mkdp_echo_preview_url = 0
+
+" a custom vim function name to open preview page
+" this function will receive url as param
+" default is empty
+let g:mkdp_browserfunc = ''
+
+" options for markdown render
+" mkit: markdown-it options for render
+" katex: katex options for math
+" uml: markdown-it-plantuml options
+" maid: mermaid options
+" disable_sync_scroll: if disable sync scroll, default 0
+" sync_scroll_type: 'middle', 'top' or 'relative', default value is 'middle'
+"   middle: mean the cursor position alway show at the middle of the preview page
+"   top: mean the vim top viewport alway show at the top of the preview page
+"   relative: mean the cursor position alway show at the relative positon of the preview page
+" hide_yaml_meta: if hide yaml metadata, default is 1
+" sequence_diagrams: js-sequence-diagrams options
+" content_editable: if enable content editable for preview page, default: v:false
+" disable_filename: if disable filename header for preview page, default: 0
+let g:mkdp_preview_options = {
+    \ 'mkit': {},
+    \ 'katex': {},
+    \ 'uml': {},
+    \ 'maid': {},
+    \ 'disable_sync_scroll': 0,
+    \ 'sync_scroll_type': 'middle',
+    \ 'hide_yaml_meta': 1,
+    \ 'sequence_diagrams': {},
+    \ 'flowchart_diagrams': {},
+    \ 'content_editable': v:false,
+    \ 'disable_filename': 0
+    \ }
+
+" use a custom markdown style must be absolute path
+" like '/Users/username/markdown.css' or expand('~/markdown.css')
+let g:mkdp_markdown_css = ''
+
+" use a custom highlight style must absolute path
+" like '/Users/username/highlight.css' or expand('~/highlight.css')
+let g:mkdp_highlight_css = ''
+
+" use a custom port to start server or random for empty
+let g:mkdp_port = ''
+
+" preview page title
+" ${name} will be replace with the file name
+let g:mkdp_page_title = '「${name}」'
+
+" recognized filetypes
+" these filetypes will have MarkdownPreview... commands
+let g:mkdp_filetypes = ['markdown']
+"}}}
+"
 
 
 
@@ -520,9 +629,13 @@ Plug 'mileszs/ack.vim'                          " ack
 " Plug 'vimwiki/vimwiki'                          "vimwiki
 Plug 'tpope/vim-fugitive'                       " fugit
 Plug 'lervag/vimtex'                            " vimtex
-Plug 'suan/vim-instant-markdown', {'for': 'markdown'}  " markdown
 Plug 'voldikss/vim-translate-me'                " translate
 Plug 'ludovicchabant/vim-gutentags'             " Auto-ctags
+Plug 'liuchengxu/graphviz.vim'
+Plug 'aklt/plantuml-syntax'
+Plug 'scrooloose/vim-slumlord'
+
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 
 call plug#end()
 
